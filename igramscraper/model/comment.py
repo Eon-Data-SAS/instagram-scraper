@@ -13,6 +13,7 @@ class Comment(InitializerModel):
         self.created_at = None
         # Account object
         self.owner = None
+        self.viewer_has_liked = None
 
         super(Comment, self).__init__(props)
 
@@ -24,6 +25,7 @@ class Comment(InitializerModel):
         standart_properties = [
             'created_at',
             'text',
+            'viewer_has_liked',
         ]
 
         if prop in standart_properties:

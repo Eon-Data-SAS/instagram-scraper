@@ -4,8 +4,8 @@ from context import Instagram # pylint: disable=no-name-in-module
 
 instagram = Instagram()
 
-medias = instagram.get_medias("kevin", 25)
-media = medias[6]
+medias = instagram.get_medias("la_liendraa", 1)
+media = medias[0]
 
 print(media)
 account = media.owner

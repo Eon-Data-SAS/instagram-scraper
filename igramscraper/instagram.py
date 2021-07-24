@@ -1,5 +1,6 @@
 import time
 import requests
+from requests_html import HTMLSession
 import re
 import json
 import hashlib
@@ -20,6 +21,7 @@ from .model.tag import Tag
 from . import endpoints
 from .two_step_verification.console_verification import ConsoleVerification
 
+
 class Instagram:
     HTTP_NOT_FOUND = 404
     HTTP_OK = 200
@@ -36,7 +38,7 @@ class Instagram:
     instance_cache = None
 
     def __init__(self, sleep_between_requests=0):
-        self.__req = requests.session()
+        self.__req = HTMLSession()
         self.paging_time_limit_sec = Instagram.PAGING_TIME_LIMIT_SEC
         self.paging_delay_minimum_microsec = Instagram.PAGING_DELAY_MINIMUM_MICROSEC
         self.paging_delay_maximum_microsec = Instagram.PAGING_DELAY_MAXIMUM_MICROSEC
@@ -1020,6 +1022,7 @@ class Instagram:
         :param max_id: used to paginate
         :return: Comment List
         """
+        # self.__req = requests.session()
 
         comments = []
         index = 0

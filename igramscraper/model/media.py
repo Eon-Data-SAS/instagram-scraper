@@ -16,6 +16,7 @@ class Media(InitializerModel):
     def __init__(self, props=None):
         self.identifier = None
         self.short_code = None
+        self.accessibility_caption = None
         self.created_time = 0
         self.type = None
         self.link = None
@@ -82,12 +83,12 @@ class Media(InitializerModel):
         Shortcode: {self.short_code}
         Created at: {self.created_time}
         Caption: {self.caption}
-        Number of comments: {self.comments_count if hasattr(self,
-                                                            'commentsCount') else 0}
+        Number of comments: {self.comments_count}
         Number of likes: {self.likes_count}
         Link: {self.link}
         Hig res image: {self.image_high_resolution_url}
         Media type: {self.type}
+        Accessibility caption: {self.accessibility_caption}
         """
 
         return textwrap.dedent(string)
@@ -104,7 +105,8 @@ class Media(InitializerModel):
             'caption',
             'video_view_count',
             'caption_is_edited',
-            'is_ad'
+            'is_ad',
+            'accessibility_caption',
         ]
 
         if prop in standart_properties:
@@ -117,7 +119,7 @@ class Media(InitializerModel):
             self.short_code = value
             self.link = endpoints.get_media_page_link(self.short_code)
 
-        elif prop == 'comments':
+        elif prop == 'edge_media_preview_comment':
             self.comments_count = arr[prop]['count']
         elif prop == 'likes':
             self.likes_count = arr[prop]['count']
