@@ -869,7 +869,8 @@ class Instagram:
             jsonResponse = response.json()
 
             if jsonResponse['data']['user']['edge_followed_by']['count'] == 0:
-                return accounts
+                return
+                # return accounts
 
             edgesArray = jsonResponse['data']['user']['edge_followed_by'][
                 'edges']
@@ -885,7 +886,7 @@ class Instagram:
                 next_page = pageInfo['end_cursor']
 
             for edge in edgesArray:
-
+                yield Account(edge['node'])
                 accounts.append(Account(edge['node']))
                 index += 1
 
